@@ -1,1 +1,148 @@
 @import "tailwindcss";
+@import "./theme.css";
+
+@import "@fontsource-variable/stix-two-text";
+
+@theme {
+  --font-sans: "Stix Two Text Variable";
+  --font-mono: "IBM Plex Mono";
+}
+
+@layer base {
+  h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance;
+  }
+
+  h2 {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+
+  p {
+    @apply mb-4 leading-7 not-first:mt-4;
+  }
+
+  blockquote {
+    @apply mt-4 border-l-2 pl-6 italic;
+  }
+
+  table {
+    @apply w-full;
+  }
+
+  thead tr,
+  tbody tr {
+    @apply even:bg-muted m-0 border-t p-0;
+  }
+
+  th {
+    @apply border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right;
+  }
+
+  td {
+    @apply border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right;
+  }
+
+  ul {
+    @apply my-4 ml-4 list-outside list-disc [&>li]:mt-2;
+  }
+
+  ol {
+    @apply my-4 ml-8 list-outside list-decimal [&>li]:mt-2;
+  }
+
+  code:not(pre > code) {
+    @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+
+  pre {
+    @apply bg-muted relative rounded px-2 py-2 font-mono text-sm;
+  }
+
+  a {
+    @apply text-primary font-medium underline underline-offset-4;
+  }
+
+  .lead {
+    @apply text-muted-foreground text-xl;
+  }
+
+  .large {
+    @apply text-lg font-semibold;
+  }
+
+  small {
+    @apply text-sm leading-none font-medium;
+  }
+
+  .muted {
+    @apply text-muted-foreground text-sm;
+  }
+
+  svg.typst-doc {
+    display: inline;
+    font-size: 1.1rem;
+  }
+
+  main > svg.typst-doc {
+    @apply my-4;
+    display: block;
+  }
+}
+
+@layer components {
+  html {
+    counter-reset: gloss;
+  }
+
+  .smallcaps {
+    font-variant-caps: small-caps;
+  }
+
+  .gloss {
+    @apply relative my-4 ml-12 list-none;
+
+    &::before {
+      @apply absolute top-0 right-full w-12 pr-4 text-right;
+      counter-increment: gloss;
+      content: "(" counter(gloss) ")";
+    }
+
+    & ol {
+      @apply my-0 ml-0 list-none;
+    }
+    & li {
+      @apply my-0;
+    }
+
+    & .gloss-body {
+      @apply flex list-none flex-wrap gap-4;
+    }
+
+    & .gloss-word {
+      @apply leading-tight;
+    }
+
+    & .gloss-word-text:not(:has(+ .gloss-word-transliteration)),
+    & .gloss-word-transliteration {
+      @apply italic;
+    }
+
+    & .gloss-word-transliteration,
+    & .gloss-word-gloss {
+      @apply text-sm;
+    }
+
+    & .gloss-header,
+    & .gloss-footer {
+      @apply my-0;
+    }
+  }
+}

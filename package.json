@@ -10,9 +10,20 @@
     "format": "prettier . --write"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.13",
+    "@fontsource-variable/stix-two-text": "^5.2.8",
+    "@myriaddreamin/rehype-typst": "0.7.0-rc2",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/mdast": "^4.0.4",
     "astro": "^5.16.6",
-    "tailwindcss": "^4.1.18"
+    "mdast-util-directive": "^3.1.0",
+    "remark-directive": "^4.0.0",
+    "remark-math": "^6.0.0",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "unist-util-visit": "^5.0.0",
+    "vfile": "^6.0.3"
   },
   "devDependencies": {
     "prettier": "3.7.4",

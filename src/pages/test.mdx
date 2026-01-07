@@ -1,0 +1,45 @@
+---
+layout: ../layouts/MarkdownLayout.astro
+title: Custom Markdown Feature Test
+---
+
+# Test
+
+[Home](/)
+
+This is currently a proof-of-concept page using Markdown combined with Typst and a custom rehype plugin for linguistic interlinear glossing. Below is an example of a block expression with Typst.
+
+$$
+lambda x.lambda y.y(x)
+$$
+
+This is some more text. Oh right. $"typst"$ also works inline, so I can write facts like $e^(i tau) = 0$. Below is an example of an interlinear gloss. I use a special `gloss` directive block.
+
+:::gloss
+| Toki Pona
+jan li pana e moku tawa sina
+= person :sc[ind] give :sc[acc] food :sc[dat] you
+| 'A person gives you food.'
+:::
+
+The syntax for an interlinear gloss is as follows:
+
+```md
+:::gloss
+| Chinese
+你 写 书
+/ ní xiě **shū**
+= :sc[2SG] write **book**
+| 'You write a **book**.'
+:::
+```
+
+:::gloss
+| Chinese
+你 写 书
+/ ní xiě **shū**
+= :sc[2SG] write **book**
+| 'You write a **book**.'
+:::
+
+I'm using `remark-directive` to delineate the block. It's very useful. I also have a separate plugin that takes the `sc` directive blocks and applies smallcaps to them.
