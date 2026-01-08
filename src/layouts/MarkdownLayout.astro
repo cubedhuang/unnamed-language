@@ -9,7 +9,9 @@ const { headings } = Astro.props;
 
 <Layout>
   <div class="mx-auto grid">
-    <nav class="sticky top-0 h-screen overflow-y-auto border-r px-8 py-20">
+    <nav
+      class="sticky top-0 h-screen overflow-y-auto border-r px-8 py-20 max-lg:hidden"
+    >
       <h2 class="text-2xl font-semibold tracking-tight">Table of Contents</h2>
       <ol class="mt-4">
         {
@@ -28,20 +30,26 @@ const { headings } = Astro.props;
         }
       </ol>
     </nav>
-    <main class="prose col-start-3 min-w-0 px-12 py-16">
+
+    <main class="prose col-start-2 min-w-0 px-12 py-16 lg:col-start-3">
       <slot />
     </main>
   </div>
 </Layout>
 
 <style>
-  @media (min-width: 1280px) {
+  .grid {
+    --main-width: var(--container-3xl);
+    grid-template-columns:
+      1fr minmax(0, var(--main-width))
+      1fr;
+  }
+  @media (width >= 64rem) {
     .grid {
       --sidebar-width: var(--container-2xs);
-      --main-width: var(--container-4xl);
       grid-template-columns:
         var(--sidebar-width)
-        1fr var(--main-width)
+        1fr minmax(0, var(--main-width))
         1fr;
     }
   }

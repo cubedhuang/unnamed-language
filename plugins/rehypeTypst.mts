@@ -1,3 +1,7 @@
+/**
+ * Vendored from @myriaddreamin/rehype-typst@0.7.0-rc2 with modifications
+ */
+
 import type { Element, ElementContent, Root, RootContent } from "hast";
 import type { MessageOptions, VFile } from "vfile";
 
