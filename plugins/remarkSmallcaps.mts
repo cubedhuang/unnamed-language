@@ -21,8 +21,6 @@ export default function remarkSmallcaps() {
           | TextDirective;
         if (directive.name !== "smallcaps" && directive.name !== "sc") return;
 
-        if (directive.name !== "smallcaps" && directive.name !== "sc") return;
-
         const data = directive.data || (directive.data = {});
 
         data.hName = node.type === "textDirective" ? "span" : "div";

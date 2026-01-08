@@ -1,99 +1,123 @@
 @import "tailwindcss";
 @import "./theme.css";
+@import "./fonts.css";
+@import "@fontsource/iosevka";
 
-@import "@fontsource-variable/stix-two-text";
+@custom-variant dark (&:is(.dark *));
+
+@custom-variant hf (&:hover, &:focus);
+@custom-variant hv (&:hover, &:focus-visible);
 
 @theme {
-  --font-sans: "Stix Two Text Variable";
-  --font-mono: "IBM Plex Mono";
+  --font-sans: "Noto Sans";
+  --font-serif: "Noto Serif";
+  --font-mono: "Iosevka";
 }
 
 @layer base {
-  h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance;
+  html {
+    @apply scroll-smooth font-sans;
   }
 
-  h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
-  }
+  .prose {
+    & h1 {
+      @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance;
+    }
 
-  h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
-  }
+    & h2 {
+      @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+    }
 
-  h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight;
-  }
+    & h3 {
+      @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+    }
 
-  p {
-    @apply mb-4 leading-7 not-first:mt-4;
-  }
+    & h4 {
+      @apply mt-6 scroll-m-20 text-xl font-semibold tracking-tight;
+    }
 
-  blockquote {
-    @apply mt-4 border-l-2 pl-6 italic;
-  }
+    & p {
+      @apply mb-4 leading-7 not-first:mt-4;
+    }
 
-  table {
-    @apply w-full;
-  }
+    & blockquote {
+      @apply mt-4 border-l-2 pl-6 italic;
+    }
 
-  thead tr,
-  tbody tr {
-    @apply even:bg-muted m-0 border-t p-0;
-  }
+    & .table-container {
+      @apply my-4 overflow-x-auto;
+    }
 
-  th {
-    @apply border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right;
-  }
+    & table {
+      @apply w-full;
+    }
 
-  td {
-    @apply border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right;
-  }
+    & thead tr,
+    & tbody tr {
+      @apply m-0 border-t p-0;
+    }
 
-  ul {
-    @apply my-4 ml-4 list-outside list-disc [&>li]:mt-2;
-  }
+    & th {
+      @apply border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right;
+    }
 
-  ol {
-    @apply my-4 ml-8 list-outside list-decimal [&>li]:mt-2;
-  }
+    & td {
+      @apply border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right;
+    }
 
-  code:not(pre > code) {
-    @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-  }
+    & ul {
+      @apply my-4 ml-4 list-outside list-disc [&>li]:mt-2;
+    }
 
-  pre {
-    @apply bg-muted relative rounded px-2 py-2 font-mono text-sm;
-  }
+    & ol {
+      @apply my-4 ml-8 list-outside list-decimal [&>li]:mt-2;
+    }
 
-  a {
-    @apply text-primary font-medium underline underline-offset-4;
-  }
+    & code:not(pre > code) {
+      @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+    }
 
-  .lead {
-    @apply text-muted-foreground text-xl;
-  }
+    & pre {
+      @apply bg-muted relative rounded px-2 py-2 font-mono text-sm;
+    }
 
-  .large {
-    @apply text-lg font-semibold;
-  }
+    & a {
+      @apply text-primary hf:decoration-current font-medium underline decoration-transparent underline-offset-4 transition;
+    }
 
-  small {
-    @apply text-sm leading-none font-medium;
-  }
+    & .lead {
+      @apply text-muted-foreground text-xl;
+    }
 
-  .muted {
-    @apply text-muted-foreground text-sm;
-  }
+    & .large {
+      @apply text-lg font-semibold;
+    }
 
-  svg.typst-doc {
-    display: inline;
-    font-size: 1.1rem;
-  }
+    & small {
+      @apply text-sm leading-none font-medium;
+    }
 
-  main > svg.typst-doc {
-    @apply my-4;
-    display: block;
+    & .muted {
+      @apply text-muted-foreground text-sm;
+    }
+
+    & svg.typst-doc {
+      overflow: visible;
+    }
+
+    & svg.typst-doc.typst-math-inline {
+      display: inline;
+    }
+
+    & svg.typst-doc.typst-math-display,
+    & svg.typst-doc.typst-display {
+      @apply my-4;
+      display: block;
+    }
+
+    & svg.typst-doc.typst-math-display {
+      @apply mx-auto;
+    }
   }
 }
 
@@ -124,10 +148,6 @@
 
     & .gloss-body {
       @apply flex list-none flex-wrap gap-4;
-    }
-
-    & .gloss-word {
-      @apply leading-tight;
     }
 
     & .gloss-word-text:not(:has(+ .gloss-word-transliteration)),

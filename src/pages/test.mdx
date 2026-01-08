@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/MarkdownLayout.astro
+layout: "@/layouts/MarkdownLayout.astro"
 title: Custom Markdown Feature Test
 ---
 
@@ -29,7 +29,7 @@ The syntax for an interlinear gloss is as follows:
 | Chinese
 你 写 书
 / ní xiě **shū**
-= :sc[2SG] write **book**
+= :sc[2sg] write **book**
 | 'You write a **book**.'
 :::
 ```
@@ -38,8 +38,34 @@ The syntax for an interlinear gloss is as follows:
 | Chinese
 你 写 书
 / ní xiě **shū**
-= :sc[2SG] write **book**
+= :sc[2sg] write **book**
 | 'You write a **book**.'
 :::
 
 I'm using `remark-directive` to delineate the block. It's very useful. I also have a separate plugin that takes the `sc` directive blocks and applies smallcaps to them.
+
+I'm also using a custom vendored version of [`@myriaddreamin/rehype-typst`](https://www.npmjs.com/package/@myriaddreamin/rehype-typst) that allows me to make `typst` code blocks in addition to `math` ones. These _don't_ wrap the Typst code in `$` blocks and let me write Typst prose. This is great since I can use other Typst things I want, like [Arborly](https://typst.app/universe/package/arborly/).
+
+Hello from Markdown (to HTML).
+
+```typst
+Hello from Typst (to SVG).
+```
+
+```typst
+#tree[XP
+  [(Specifier)]
+  [X'
+    [(Adjunct)]
+    [X'
+      [X'
+        [X]
+        [(Complement)]
+      ]
+      [(Adjunct)]
+    ]
+  ]
+]
+```
+
+Look at that tree!

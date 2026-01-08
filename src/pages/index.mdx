@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/MarkdownLayout.astro
+layout: "@/layouts/MarkdownLayout.astro"
 title: Unnamed Language
 ---
 
@@ -7,8 +7,37 @@ title: Unnamed Language
 
 ## Introduction
 
-The goal of this language is to make something that looks kind of like a loglang.
+The goal of this language is to make something that looks kind of like a loglang. Hopefully, this follows Hoemaı's definition of a logical language from his [blog post](https://toaqlanguage.wordpress.com/2022/09/26/logical-language-misconceptions/) on the topic.
+
+By the time I'm done writing this, we should hopefully have an unambiguous translation from the following sentence to the following logical form.
+
+:::gloss
+ch ná soli vén fan
+= like some creature every food
+| 'Some animals like every food.'
+| $$ "ASSERT"(lambda x: "animal"(x).x ... "something") $$
+:::
 
 ## Phonology
 
-- [Page test](/test)
+### Consonants
+
+All consonants but /ʔ/ may appear in a syllable onset.
+
+| Consonants    | Labial | Alveolar | Retroflex | Velar | Glottal |
+| ------------- | ------ | -------- | --------- | ----- | ------- |
+| **Nasal**     | m      | n        |           | ŋ     |         |
+| **Plosive**   | p      | t        |           | k     | ʔ       |
+| ^             | b      | d        |           | g     |         |
+| **Affricate** |        | t͡s d͡z    | ʈ͡ʂ ɖ͡ʐ     |       |         |
+| **Fricative** | f      | s        | ʂ         |       | h       |
+| ^             | v      | z        | ʐ         |       |         |
+| **Liquid**    |        |          |           |       |         |
+
+The sounds /ʈ͡ʂ ɖ͡ʐ ʂ ʐ/ have allophones /t͡ʃ d͡ʒ ʃ ʒ/.
+
+## Orthography
+
+## Appendix
+
+- [Custom Markdown feature test](/test)

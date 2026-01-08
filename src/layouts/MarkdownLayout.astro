@@ -1,9 +1,52 @@
 ---
 import Layout from "./Layout.astro";
+import type { MarkdownLayoutProps } from "astro";
+
+type Props = MarkdownLayoutProps<{}>;
+
+const { headings } = Astro.props;
 ---
 
 <Layout>
-  <main class="mx-auto my-12 max-w-2xl px-8">
-    <slot />
-  </main>
+  <div class="mx-auto grid">
+    <nav class="sticky top-0 h-screen overflow-y-auto border-r px-8 py-20">
+      <h2 class="text-2xl font-semibold tracking-tight">Table of Contents</h2>
+      <ol class="mt-4">
+        {
+          headings
+            .filter((heading) => heading.depth !== 1 && heading.depth < 5)
+            .map((heading) => (
+              <li style={`--depth: ${heading.depth - 1}`}>
+                <a
+                  href={`#${heading.slug}`}
+                  class="hv:text-primary hv:font-medium transition-all"
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))
+        }
+      </ol>
+    </nav>
+    <main class="prose col-start-3 min-w-0 px-12 py-16">
+      <slot />
+    </main>
+  </div>
 </Layout>
+
+<style>
+  @media (min-width: 1280px) {
+    .grid {
+      --sidebar-width: var(--container-2xs);
+      --main-width: var(--container-4xl);
+      grid-template-columns:
+        var(--sidebar-width)
+        1fr var(--main-width)
+        1fr;
+    }
+  }
+
+  li {
+    margin-left: calc((var(--depth) - 1) * var(--spacing) * 4);
+  }
+</style>

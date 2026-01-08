@@ -1,15 +1,20 @@
 // @ts-check
 
 import mdx from "@astrojs/mdx";
-// @ts-expect-error no type declarations available
-import rehypeTypst from "@myriaddreamin/rehype-typst";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
 import remarkDirective from "remark-directive";
+import {
+  extendedTableHandlers,
+  remarkExtendedTable,
+} from "remark-extended-table";
 import remarkMath from "remark-math";
 
+import rehypeTypst from "./plugins/rehypeTypst.mts";
 import remarkGloss from "./plugins/remarkGloss.mjs";
 import remarkSmallcaps from "./plugins/remarkSmallcaps.mts";
+import rehypeWrapTables from "./plugins/remarkWrapTables.mts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,8 +23,15 @@ export default defineConfig({
   },
   integrations: [mdx()],
   markdown: {
-    remarkPlugins: [remarkMath, remarkDirective, remarkSmallcaps, remarkGloss],
-    rehypePlugins: [rehypeTypst],
+    remarkPlugins: [
+      remarkExtendedTable,
+      remarkMath,
+      remarkDirective,
+      remarkSmallcaps,
+      remarkGloss,
+    ],
+    rehypePlugins: [rehypeWrapTables, rehypeTypst, rehypeExternalLinks],
+    remarkRehype: { handlers: { ...extendedTableHandlers } },
     syntaxHighlight: false,
   },
 });

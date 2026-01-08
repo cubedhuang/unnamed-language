@@ -11,9 +11,9 @@ interface GlossRow {
 }
 
 interface Gloss {
-  header: PhrasingContent[] | null;
+  headers: PhrasingContent[][];
   rows: GlossRow[];
-  footer: PhrasingContent[] | null;
+  footers: PhrasingContent[][];
 }
 
 export default function remarkGloss() {
@@ -27,19 +27,19 @@ export default function remarkGloss() {
       } catch (error) {
         file.fail((error as Error).message, node);
       }
-      const { header, rows, footer } = parseResult;
+      const { headers, rows, footers } = parseResult;
       const columns = buildColumns(rows);
 
       node.data = { hName: "figure", hProperties: { class: "gloss" } };
       node.children = [];
-      if (header) {
-        node.children.push(createHeader(header));
+      if (headers.length > 0) {
+        node.children.push(createHeader(headers));
       }
       if (columns.length > 0) {
         node.children.push(createWordGrid(columns));
       }
-      if (footer) {
-        node.children.push(createFooter(footer));
+      if (footers.length > 0) {
+        node.children.push(createFooter(footers));
       }
     });
   };
@@ -69,28 +69,32 @@ function parseGlossNode(node: ContainerDirective): Gloss {
     }
   }
 
-  let header: PhrasingContent[] | null = null;
-  let footer: PhrasingContent[] | null = null;
+  const headers: PhrasingContent[][] = [];
+  const footers: PhrasingContent[][] = [];
   const rows: GlossRow[] = [];
+
+  let firstRowIndex = lines.findIndex((line) => line.type === "row");
+  if (firstRowIndex === -1) firstRowIndex = lines.length;
+  let lastRowIndex = lines.findLastIndex((line) => line.type === "row");
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (line.type === "meta") {
-      if (i !== 0 && i !== lines.length - 1) {
+      if (i < firstRowIndex) {
+        headers.push(line.content);
+      } else if (i > lastRowIndex) {
+        footers.push(line.content);
+      } else {
         throw new Error(
           "Header and footer lines denoted by '|' may only appear at the beginning or end of a gloss block",
         );
-      } else if (i === 0) {
-        header = line.content;
-      } else {
-        footer = line.content;
       }
     } else {
       rows.push(line.row);
     }
   }
 
-  return { header, rows, footer };
+  return { headers, rows, footers };
 }
 
 type ParsedLine =
@@ -197,11 +201,18 @@ function createColumn(words: ColumnWord[]): ListItem {
   };
 }
 
-function createHeader(content: PhrasingContent[]): Paragraph {
+function createHeader(lines: PhrasingContent[][]): Paragraph {
+  const children: PhrasingContent[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (i > 0) {
+      children.push({ type: "break" });
+    }
+    children.push(...lines[i]);
+  }
   return {
     type: "paragraph",
     data: { hName: "figcaption", hProperties: { class: "gloss-header" } },
-    children: content,
+    children,
   };
 }
 
@@ -215,11 +226,18 @@ function createWordGrid(columns: ListItem[]): List {
   };
 }
 
-function createFooter(content: PhrasingContent[]): Paragraph {
+function createFooter(lines: PhrasingContent[][]): Paragraph {
+  const children: PhrasingContent[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (i > 0) {
+      children.push({ type: "break" });
+    }
+    children.push(...lines[i]);
+  }
   return {
     type: "paragraph",
     data: { hName: "p", hProperties: { class: "gloss-footer" } },
-    children: content,
+    children,
   };
 }
 
