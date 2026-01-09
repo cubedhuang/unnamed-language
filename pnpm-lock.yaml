@@ -59,6 +59,9 @@ importers:
       remark-extended-table:
         specifier: ^2.0.3
         version: 2.0.3(mdast-util-gfm-table@2.0.0)(micromark-extension-gfm-table@2.1.1)(micromark@4.0.2)(remark-gfm@4.0.1)(remark-parse@11.0.0)(unified@11.0.5)
+      remark-interlinear-gloss:
+        specifier: ^1.0.3
+        version: 1.0.3(remark-directive@4.0.0)
       remark-math:
         specifier: ^6.0.0
         version: 6.0.0
@@ -1962,6 +1965,11 @@ packages:
 
   remark-gfm@4.0.1:
     resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
+
+  remark-interlinear-gloss@1.0.3:
+    resolution: {integrity: sha512-Lgo8LKqIh2y/9m+cdLWv8sPXkmc2CXWqywbx4cSWtdCPDec5VHLYtVaA41hCwkb4vdLZfr1pK1neXhpCjGmzMw==}
+    peerDependencies:
+      remark-directive: ^4.0.0
 
   remark-math@6.0.0:
     resolution: {integrity: sha512-MMqgnP74Igy+S3WwnhQ7kqGlEerTETXMvJhrUzDikVZ2/uogJCb+WHUg97hK9/jcfc0dkD73s3LN8zU49cTEtA==}
@@ -4756,6 +4764,12 @@ snapshots:
       unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
+
+  remark-interlinear-gloss@1.0.3(remark-directive@4.0.0):
+    dependencies:
+      remark-directive: 4.0.0
+      unified: 11.0.5
+      unist-util-visit: 5.0.0
 
   remark-math@6.0.0:
     dependencies:

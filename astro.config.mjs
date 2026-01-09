@@ -9,10 +9,10 @@ import {
   extendedTableHandlers,
   remarkExtendedTable,
 } from "remark-extended-table";
+import remarkInterlinearGloss from "remark-interlinear-gloss";
 import remarkMath from "remark-math";
 
 import rehypeTypst from "./plugins/rehypeTypst.mts";
-import remarkGloss from "./plugins/remarkGloss.mjs";
 import remarkSmallcaps from "./plugins/remarkSmallcaps.mts";
 import rehypeWrapTables from "./plugins/remarkWrapTables.mts";
 
@@ -28,7 +28,7 @@ export default defineConfig({
       remarkMath,
       remarkDirective,
       remarkSmallcaps,
-      remarkGloss,
+      remarkInterlinearGloss,
     ],
     rehypePlugins: [rehypeWrapTables, rehypeTypst, rehypeExternalLinks],
     remarkRehype: { handlers: { ...extendedTableHandlers } },

@@ -129,40 +129,4 @@
   .smallcaps {
     font-variant-caps: small-caps;
   }
-
-  .gloss {
-    @apply relative my-4 ml-12 list-none;
-
-    &::before {
-      @apply absolute top-0 right-full w-12 pr-4 text-right;
-      counter-increment: gloss;
-      content: "(" counter(gloss) ")";
-    }
-
-    & ol {
-      @apply my-0 ml-0 list-none;
-    }
-    & li {
-      @apply my-0;
-    }
-
-    & .gloss-body {
-      @apply flex list-none flex-wrap gap-4;
-    }
-
-    & .gloss-word-text:not(:has(+ .gloss-word-transliteration)),
-    & .gloss-word-transliteration {
-      @apply italic;
-    }
-
-    & .gloss-word-transliteration,
-    & .gloss-word-gloss {
-      @apply text-sm;
-    }
-
-    & .gloss-header,
-    & .gloss-footer {
-      @apply my-0;
-    }
-  }
 }
